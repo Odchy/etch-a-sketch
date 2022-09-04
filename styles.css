@@ -30,6 +30,7 @@ body {
     border-radius: 8px;
     background-color: var(--main-color);
     gap: 30px;
+    padding: 20px 0;
 }
 
 #title {
@@ -51,4 +52,52 @@ body {
 #menu {
     display: flex;
     align-items: center;
+    gap: 40px;
 }
+
+input[type=range] {
+    -webkit-appearance: none;
+    background: var(--second-color);
+    outline: none;
+    border-radius: 50px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    background-color: var(--main-color);
+    overflow: visible;
+    cursor: pointer;
+  }
+  
+
+button {
+    cursor: pointer;
+    outline: 0;
+    color: #fff;
+    background-color: var(--second-color);
+    border-color: var(--second-color);
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+button:hover {
+    color: #fff;
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
+}
+
+.active {
+    color: #fff;
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
+}
+
