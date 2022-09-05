@@ -1,10 +1,16 @@
 const DEFAULT_GRID_SIZE = 16;
+let squareColor = "#1B5299";
+let rgbMode = false;
+let mousedown = false;
 
 const grid = document.querySelector("#grid");
 const resetBtn = document.querySelector("#resetBtn");
 const sizeValue = document.querySelector("#sizeValue")
 const sizeSlider = document.querySelector("#sizeSlider")
-const squareColor = "#1B5299";
+const colorBtn = document.querySelector("#colorBtn")
+const rgbBtn = document.querySelector("#rgbBtn")
+const colorSelector = document.getElementById("colorSelector");
+
 
 function drawGrid(size) {
     const squareSize = (grid.clientWidth / size);
@@ -25,7 +31,12 @@ function drawSquare(squareSize) {
 }
 
 function colorSquare(){
-    this.style.backgroundColor = squareColor;
+    if (!mousedown) return;
+
+    if (rgbMode) 
+        this.style.backgroundColor = getRandomColor(); 
+    else
+        this.style.backgroundColor = squareColor;
 }
 
 function getRandomColor(){
@@ -36,6 +47,7 @@ function reset() {
     sizeValue.innerHTML = `${DEFAULT_GRID_SIZE} x ${DEFAULT_GRID_SIZE}`;
     emptyGrid();
     drawGrid(DEFAULT_GRID_SIZE);
+    setColorMode();
 }
 
 function emptyGrid() {
@@ -51,8 +63,34 @@ function onSizeChange(){
     drawGrid(this.value);
 }
 
+function setColorMode(){
+    colorBtn.classList.add('active');
+    rgbBtn.classList.remove('active');
+
+    rgbMode = false;
+}
+
+function setRgbMode(){
+    colorBtn.classList.remove('active');
+    rgbBtn.classList.add('active');
+
+    rgbMode = true;
+}
+
+
 drawGrid(DEFAULT_GRID_SIZE);
 
 resetBtn.addEventListener('click', reset);
 sizeSlider.addEventListener('input', onSizeInput);
 sizeSlider.addEventListener('change', onSizeChange);
+colorBtn.addEventListener('click', setColorMode);
+rgbBtn.addEventListener('click', setRgbMode);
+colorSelector.addEventListener('input', () => {
+    squareColor = colorSelector.value;
+});
+grid.addEventListener('mousedown', () => {
+    mousedown = true;
+});
+grid.addEventListener('mouseup', () => {
+    mousedown = false;
+});
